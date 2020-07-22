@@ -16,13 +16,10 @@ class RestaurantController {
         throw new ErrorHandler(400, `Missing data: name: ${name}, kindOfRestaurant: ${kindOfRestaurant}, specials: ${specials}`)
       }
       const restaurant = this.cache.get('restaurant')
-      console.log(restaurant)
       if (restaurant.nombre === name ) {
         throw new ErrorHandler(400, 'There is already a restaurant with that name')
       }
       this.cache.set('restaurant', req.body)
-      const restaurant1 = this.cache.get('restaurant')
-      console.log(restaurant1, '1')
       return res.status(201).json('Created')
     } catch (e) {
       return next(e)
